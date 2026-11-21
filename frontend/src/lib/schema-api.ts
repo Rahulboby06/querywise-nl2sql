@@ -38,7 +38,7 @@ export type DatabaseSchema = {
 }
 
 const configuredBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim()
-export const API_BASE_URL = (configuredBaseUrl || 'http://127.0.0.1:8001').replace(/\/+$/, '')
+export const API_BASE_URL = (configuredBaseUrl || '').replace(/\/+$/, '')
 
 export async function fetchDatabaseSchema(): Promise<DatabaseSchema> {
   const response = await fetch(`${API_BASE_URL}/api/schema`, {
