@@ -12,9 +12,9 @@ venv/
 !**/.env.example
 
 # Frontend build output and dependencies
-node_modules/
-dist/
-build/
+# node_modules/
+# dist/
+# build/
 
 # Development tools and logs
 .vscode/

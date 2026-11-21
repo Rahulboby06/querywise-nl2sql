@@ -7,11 +7,24 @@ export type SQLValidation = {
   validation_errors: string[]
 }
 
-export type SQLValidationRequest = { sql: string }
+export type AIGenerationRequest = { question: string }
+
+export type AIGenerationResponse = {
+  success: boolean
+  history_id: number
+  generated_sql: string | null
+  explanation: string
+  tables_used: string[]
+  validation: SQLValidation
+  error: string | null
+}
+
+export type SQLValidationRequest = { sql: string; history_id?: number }
 
 export type SQLExecutionRequest = {
   sql: string
   limit: number
+  history_id?: number
 }
 
 export type SQLExecutionResponse = {
@@ -46,6 +59,10 @@ async function postJson<TRequest, TResponse>(path: string, request: TRequest): P
   }
 
   return payload as TResponse
+}
+
+export function generateSQL(question: string): Promise<AIGenerationResponse> {
+  return postJson('/api/ai/generate', { question })
 }
 
 export function validateSQL(sql: string, historyId?: number): Promise<SQLValidation> {
