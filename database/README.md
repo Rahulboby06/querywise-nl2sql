@@ -1,0 +1,5 @@
+﻿# Query history setup
+
+The backend uses the PostgreSQL database configured by `DATABASE_URL` (the local project database is `nl2sql_db`). On the first history or Assistant generation request in each backend process, it runs [history.sql](./history.sql). The script only creates the internal schema, table, and index if missing; it does not drop, truncate, or recreate history. The configured database role needs permission to create these objects on first use and to read, insert, update, and delete history records afterwards. An administrator can run the same script in `nl2sql_db` ahead of time and grant the application role the necessary permissions.
+
+History belongs to the existing local single-user workspace and has the same access model as the other API endpoints; it is not per-user authentication. The table is separate from the public application schema used by the Database Explorer and Gemini. If history setup or the database is unavailable, the Assistant cannot start a generation, so an attempt is never silently omitted. Deleting an entry is permanent.
