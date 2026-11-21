@@ -1,0 +1,22 @@
+# Python
+**/__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Frontend build output and dependencies
+node_modules/
+dist/
+build/
+
+# Development tools and logs
+.vscode/
+.idea/
+*.log
